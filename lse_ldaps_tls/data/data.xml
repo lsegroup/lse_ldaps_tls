@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="lse_ldap_disable_chase_ref" model="ir.config_parameter">
+            <field name="key">lse_ldap_tls.disable_chase_ref</field>
+            <field name="value">False</field>
+        </record>
+    </data>
+</odoo>

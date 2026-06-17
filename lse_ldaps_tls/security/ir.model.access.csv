@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_res_company_ldap_lse_system,res.company.ldap.lse system,model_res_company_ldap_lse,base.group_system,1,1,1,1
+access_res_company_ldap_lse_user,res.company.ldap.lse user,model_res_company_ldap_lse,base.group_user,1,0,0,0
+access_res_ldap_odoo_mapping_system,res.ldap.odoo.mapping system,model_res_ldap_odoo_mapping,base.group_system,1,1,1,1
+access_res_ldap_odoo_mapping_user,res.ldap.odoo.mapping user,model_res_ldap_odoo_mapping,base.group_user,1,0,0,0
+access_res_odoo_ldap_mapping_system,res.odoo.ldap.mapping system,model_res_odoo_ldap_mapping,base.group_system,1,1,1,1
+access_res_odoo_ldap_mapping_user,res.odoo.ldap.mapping user,model_res_odoo_ldap_mapping,base.group_user,1,0,0,0
+access_res_ldap_group_system,res.ldap.group system,model_res_ldap_group,base.group_system,1,1,1,1
+access_res_ldap_group_user,res.ldap.group user,model_res_ldap_group,base.group_user,1,0,0,0
+access_res_ldap_ou_system,res.ldap.ou system,model_res_ldap_ou,base.group_system,1,1,1,1
+access_res_ldap_ou_user,res.ldap.ou user,model_res_ldap_ou,base.group_user,1,0,0,0

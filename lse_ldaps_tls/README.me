@@ -1,0 +1,50 @@
+# LSE LDAP TLS 1.3 Authentication
+
+Enterprise-grade LDAPS authentication module for Odoo 17.0+ with native TLS 1.3 support and PCI DSS compliance.
+
+## Features
+
+- **Native LDAPS**: Direct TLS connections to port 636, bypassing StartTLS limitations
+- **TLS 1.3 Support**: Full compatibility with modern TLS protocols
+- **PCI Compliance**: Meets stringent security requirements for regulated industries
+- **OpenLDAP Compatible**: Optimized for OpenLDAP 2.6+ with GnuTLS backend
+- **Certificate Validation**: Advanced certificate validation with Let's Encrypt support
+- **Enterprise Logging**: Comprehensive authentication logging and monitoring
+
+## Installation
+
+1. Place this module in your Odoo addons directory
+2. Uninstall the standard `auth_ldap` module if present
+3. Install `LSE LDAP TLS 1.3` module
+4. Configure LDAPS settings in General Settings
+
+## Configuration
+
+Navigate to **Settings > General Settings > LDAPS Authentication** to configure:
+
+- LDAPS Server: Your LDAP server hostname
+- Port: 636 (standard LDAPS port)
+- TLS Version: Select TLS 1.3 for maximum security
+- Certificate Validation: Choose appropriate validation level
+- LDAP Base DN: Your directory base
+- Search Filter: User search filter with %s placeholder
+
+## Requirements
+
+- Odoo 17.0+
+- python-ldap library
+- OpenLDAP server with TLS/SSL configuration
+- Valid SSL certificates (Let's Encrypt supported)
+
+## Support
+
+Professional support available from LSE Group:
+- Email: support@lumanet.info
+- Website: https://lumanet.info
+- Custom implementations and enterprise consulting services available
+
+## License
+
+Copyright (C) 2025 LSE Group
+Licensed under Odoo Proprietary License v1.0
+

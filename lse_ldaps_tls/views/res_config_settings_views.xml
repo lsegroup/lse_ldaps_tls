@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="res_config_settings_view_form_inherit_lse_ldap" model="ir.ui.view">
+            <field name="name">res.config.settings.view.form.inherit.lse.ldap</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="inside">
+                    <app string="LDAPS" name="lse_ldaps_tls">
+                        <block title="LDAPS Authentication" name="ldaps_auth_block">
+                            <setting string="LSE LDAP TLS 1.3" help="Enterprise LDAPS authentication with TLS 1.2,1.3 &amp; Argon2 support">
+                                <field name="module_lse_ldaps_tls"/>
+                                <div class="content-group" invisible="not module_lse_ldaps_tls">
+                                    <button type="action" name="%(lse_ldaps_tls.action_res_company_ldap_tree)d" string="    ➥ Configure LDAP Servers" class="btn-link"/>
+                                    <div class="mt8">
+                                        <field name="ldaps" mode="list" readonly="true" options="{'no_create_edit': True}" style="width: 100% !important;">
+                                            <list string="LDAPS Servers" editable="bottom">
+                                                <field name="sequence" widget="handle"/>
+                                                <field name="ldap_server"/>
+                                                <field name="ldap_server_port"/>
+                                                <field name="ldap_tls_version"/>
+                                                <field name="active"/>
+                                                <button name="test_connection" type="object" icon="fa-plug" title="Test Connection"/>
+                                                <button name="open_ldap_form" type="object" icon="fa-edit" title="Edit LDAP Server"/>
+                                            </list>
+                                        </field>
+                                    </div>
+                                </div>
+                            </setting>
+                        </block>
+                    </app>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

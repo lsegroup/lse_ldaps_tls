@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_company_ldap_tree" model="ir.ui.view">
+        <field name="name">res.company.ldap.lse.list</field>
+        <field name="model">res.company.ldap.lse</field>
+        <field name="arch" type="xml">
+            <list string="LDAPS Servers">
+                <field name="sequence" widget="handle"/>
+                <field name="ldap_server"/>
+                <field name="ldap_server_port"/>
+                <field name="ldap_tls_version"/>
+                <field name="ldap_cert_validation"/>
+                <field name="active"/>
+                <field name="last_sync"/>
+                <button name="test_connection" type="object"
+                        icon="fa-plug" title="Test Connection"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_company_ldap_form" model="ir.ui.view">
+        <field name="name">res.company.ldap.lse.form</field>
+        <field name="model">res.company.ldap.lse</field>
+        <field name="arch" type="xml">
+            <form string="LDAPS Server Configuration">
+                <header>
+                    <button name="test_connection" type="object" string="Test Connection" class="oe_highlight"/>
+                    <button name="refresh_ldap_groups" type="object" string="Refresh LDAP Groups" class="btn-secondary" invisible="not connection_tested"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" type="object" name="test_connection" icon="fa-plug">
+                            <field string="Status" name="active" widget="boolean_button"/>
+                        </button>
+                    </div>
+                    <group>
+                        <group name="server_config" string="Server Configuration">
+                            <field name="sequence"/>
+                            <field name="company"/>
+                            <field name="ldap_server" placeholder="ldap.example.com"/>
+                            <field name="ldap_server_port"/>
+                            <field name="ldap_tls_version"/>
+                            <field name="ldap_cert_validation"/>
+                        </group>
+                        <group name="auth_config" string="Authentication">
+                            <field name="ldap_binddn" placeholder="cn=admin,dc=example,dc=com"/>
+                            <field name="ldap_password" password="True"/>
+                            <field name="ldap_base" placeholder="dc=example,dc=com"/>
+                            <label for="ldap_filter" string="LDAP Filter"/>
+                            <div class="o_row">
+                                <field name="ldap_filter" placeholder="(mail=%s)" class="o_field_widget"/>
+                                <span class="fa fa-question-circle o_field_help" title="Use (mail=%s) for email authentication. Use | for OR logic: (|(memberOf=group1)(memberOf=group2)). The %s placeholder will be replaced with the login email."/>
+                            </div>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Group Mappings" name="group_mappings" invisible="not connection_tested">
+                            <separator string="LDAP → Odoo Mappings"/>
+                            <div class="row">
+                                <div class="col-6">
+                                    <span>LDAP → Odoo Sync </span>
+                                    <field name="active" widget="boolean_toggle" nolabel="1" readonly="1"/>
+                                </div>
+                                <div class="col-6"></div>
+                            </div>
+                            <field name="ldap_odoo_mappings" mode="list">
+                                <list string="LDAP Group Mappings" editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="ldap_groups" widget="many2many_tags" options="{'color_field': 'color', 'no_create': True}" placeholder="Select LDAP Groups" width="50%"/>
+                                    <field name="odoo_groups" widget="many2many_tags" options="{'no_create': True}" placeholder="Select Odoo Groups" width="50%"/>
+                                </list>
+                            </field>
+                            <separator string="Odoo → LDAP Mappings"/>
+                            <div class="row">
+                                <div class="col-6">
+                                    <span>Odoo → LDAP Sync </span>
+                                    <field name="auto_create_ldap_users" widget="boolean_toggle" nolabel="1" readonly="1"/>
+                                </div>
+                                <div class="col-6"></div>
+                            </div>
+                            <field name="odoo_ldap_mappings" mode="list">
+                                <list string="Odoo → LDAP Group Mappings" editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="odoo_groups" widget="many2many_tags" options="{'no_create': True}" placeholder="Select Odoo Groups" width="30%"/>
+                                    <field name="ldap_groups" widget="many2many_tags" options="{'color_field': 'color', 'no_create': True}" placeholder="Select LDAP Groups" width="30%"/>
+                                    <field name="target_ou" widget="many2one" options="{'no_create': True}" placeholder="Select Target OU" width="30%"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="User Management" name="user_management" invisible="not connection_tested">
+                            <div class="row mt16">
+                                <div class="col-4">LDAP Filter</div>
+                                <div class="col-7"><field name="creation_filter" placeholder="(memberOf=cn=odoo-users,ou=groups,dc=domain,dc=com)" nolabel="1"/></div>
+                                <div class="col-1"><span class="fa fa-question-circle o_field_help" title="Additional LDAP filter to control which users can be auto-created. Leave empty to allow all authenticated users."/></div>
+                            </div>
+                            <div class="row mt16">
+                                <div class="col-4">Auto-create Users (LDAP → Odoo)</div>
+                                <div class="col-7"><field name="active" widget="boolean_toggle" nolabel="1"/></div>
+								<div class="col-1"></div>
+                            </div>
+                            <div class="row mt8">
+                                <div class="col-4">Auto-create Users (Odoo → LDAP)</div>
+                                <div class="col-7"><field name="auto_create_ldap_users" widget="boolean_toggle" nolabel="1"/></div>
+								<div class="col-1"></div>
+                            </div>
+                            <div class="row mt8">
+                                <div class="col-4">LDAP Password (Argon2 Hash)</div>
+                                <div class="col-7">
+                                    <field name="ldap_argon2_enabled" widget="boolean_toggle" nolabel="1" readonly="not auto_create_ldap_users"/>
+                                </div>
+								<div class="col-1"></div>
+                            </div>
+                            <div class="row mt8">
+                                <div class="col-4">Delete Odoo Users if not found in LDAP</div>
+                                <div class="col-7"><field name="delete_missing_users" widget="boolean_toggle" nolabel="1"/></div>
+								<div class="col-1"></div>
+                            </div>
+                        </page>
+                        <page string="Statistics" name="statistics" invisible="not connection_tested">
+                            <group>
+							    <field name="last_sync" readonly="1"/>
+                            </group>
+                        </page>
+                    </notebook>
+                    <field name="connection_tested" invisible="1"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_res_company_ldap_tree" model="ir.actions.act_window">
+        <field name="name">LDAPS Servers</field>
+        <field name="res_model">res.company.ldap.lse</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Configure your LDAPS servers
+            </p>
+            <p>
+                Set up secure LDAP authentication with TLS 1.3 support.<br/>
+                Click "Create" to add your first LDAPS server configuration.
+            </p>
+        </field>
+    </record>
+
+</odoo>

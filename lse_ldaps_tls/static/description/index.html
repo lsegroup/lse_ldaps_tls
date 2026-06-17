@@ -1,0 +1,132 @@
+<section class="oe_container">
+    <div class="oe_row oe_spaced">
+        <div class="oe_span12" style="text-align:center;">
+            <img class="oe_screenshot" src="banner.png" style="max-width:100%;"/>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container">
+    <div class="oe_row oe_spaced">
+        <h2 class="oe_slogan">LSE Enterprise LDAPS</h2>
+        <h3 class="oe_slogan">TLS 1.3-only LDAP authentication - WolfSSL hardened, PCI DSS compliant, no fallback, no exceptions</h3>
+    </div>
+</section>
+
+<section class="oe_container oe_dark">
+    <div class="oe_row oe_spaced">
+        <div class="oe_span6">
+            <h3>What it does</h3>
+            <p>
+                LSE Enterprise LDAPS replaces Odoo's built-in LDAP authentication
+                with a hardened implementation that enforces <strong>TLS 1.3 only</strong>
+                - no fallback, no legacy protocols, no exceptions.
+            </p>
+            <p>
+                Built for enterprises running OpenLDAP 2.6+ or Active Directory
+                where PCI DSS, ISO 27001, or internal security policy mandates
+                encrypted directory access on port 636.
+            </p>
+        </div>
+        <div class="oe_span6">
+            <h3>Key Features</h3>
+            <ul>
+                <li>Native LDAPS on port 636 - replaces plain LDAP entirely</li>
+                <li>TLS 1.3 enforced via WolfSSL - no TLS 1.0/1.1/1.2 fallback</li>
+                <li>Argon2 password hashing for LDAP-authenticated users</li>
+                <li>OpenLDAP 2.6+ and Active Directory compatible</li>
+                <li>Group-to-role mapping (LDAP groups → Odoo internal groups)</li>
+                <li>OU-based user filtering</li>
+                <li>Let's Encrypt certificate support</li>
+                <li>Enterprise-grade authentication audit logging</li>
+                <li>PCI DSS &amp; ISO 27001 audit-ready configuration</li>
+                <li>License-enforced via LSE License Agent</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container">
+    <div class="oe_row oe_spaced">
+        <div class="oe_span12" style="text-align:center;">
+            <h3>Configuration &amp; Settings</h3>
+            <img class="oe_screenshot" src="settings01.png" style="max-width:100%; margin-bottom:16px;"/>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container oe_dark">
+    <div class="oe_row oe_spaced">
+        <div class="oe_span6" style="text-align:center;">
+            <img class="oe_screenshot" src="settings02.png" style="max-width:100%;"/>
+        </div>
+        <div class="oe_span6" style="text-align:center;">
+            <img class="oe_screenshot" src="settings03.png" style="max-width:100%;"/>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container">
+    <div class="oe_row oe_spaced">
+        <div class="oe_span4">
+            <h3>&#128274; TLS 1.3 Only</h3>
+            <p>
+                Every connection to your LDAP directory is encrypted with
+                TLS 1.3 via WolfSSL. Unencrypted or downgraded connections
+                are refused at the socket level - not just warned about.
+            </p>
+        </div>
+        <div class="oe_span4">
+            <h3>&#9989; PCI DSS Ready</h3>
+            <p>
+                Satisfies PCI DSS v4.0 requirement 8.3.2 (strong cryptography for
+                authentication) and 2.2.7 (all non-console admin access encrypted).
+                Audit evidence available on request.
+            </p>
+        </div>
+        <div class="oe_span4">
+            <h3>&#128275; Argon2 Hashing</h3>
+            <p>
+                LDAP-authenticated users have their credentials protected with
+                Argon2 hashing - the winner of the Password Hashing Competition,
+                resistant to GPU and side-channel attacks.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container oe_dark">
+    <div class="oe_row oe_spaced">
+        <div class="oe_span6">
+            <h3>&#128295; Requirements</h3>
+            <ul>
+                <li>Odoo 19 Community or Enterprise</li>
+                <li>OpenLDAP 2.6+ or Active Directory with port 636 enabled</li>
+                <li>Valid TLS certificate on your LDAP server</li>
+                <li>python-ldap and argon2-cffi Python packages</li>
+                <li>Replaces the built-in <code>auth_ldap</code> module</li>
+            </ul>
+        </div>
+        <div class="oe_span6">
+            <h3>&#128196; Why WolfSSL over GnuTLS?</h3>
+            <p>
+                WolfSSL is FIPS 140-3 validated, has a significantly smaller attack
+                surface than GnuTLS, and is purpose-built for embedded and
+                security-critical environments. It's the TLS library of choice for
+                PCI DSS Level 1 deployments at LSE Group.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container">
+    <div class="oe_row oe_spaced">
+        <div class="oe_span12">
+            <h3>Support</h3>
+            <p>
+                Commercial support: <a href="mailto:support@lumanet.info">support@lumanet.info</a><br/>
+                Published by <strong>LSE Group</strong> &mdash; Enterprise Odoo Solutions
+            </p>
+        </div>
+    </div>
+</section>
